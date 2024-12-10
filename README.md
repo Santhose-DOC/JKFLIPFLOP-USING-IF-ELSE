@@ -1,5 +1,3 @@
-# JKFLIPFLOP-USING-IF-ELSE
-
 **AIM:** 
 
 To implement  JK flipflop using verilog and validating their functionality using their functional tables
@@ -34,15 +32,67 @@ The maximum possible groupings of adjacent ones are already shown in the figure.
 
 **Procedure**
 
-/* write all the steps invloved */
+Step 1:  Type the program in Quartus software.
+
+Step 2:  Compile and run the program.
+
+Step 3:  Generate the RTL schematic and save the logic diagram.
+
+Step 4:  Create nodes for inputs and outputs to generate the timing diagram.
+
+Step 5:  For different input combinations generate the timing diagram.
+
 
 **PROGRAM**
 
-/* Program for flipflops and verify its truth table in quartus using Verilog programming. Developed by: RegisterNumber:
-*/
+
+~~~
+module jk_flipflop (
+    input clk,    // Clock signal
+    input reset,  // Active-high reset signal
+    input j,      // J input
+    input k,      // K input
+    output reg q, // Output
+    output reg q_bar // Complement of output
+);
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            q <= 1'b0;       // Reset the flip-flop
+            q_bar <= 1'b1;   // Complement output
+        end
+        else begin
+            case ({j, k})
+                2'b00: ;              // No change
+                2'b01: begin          // Reset
+                    q <= 1'b0;
+                    q_bar <= 1'b1;
+                end
+                2'b10: begin          // Set
+                    q <= 1'b1;
+                    q_bar <= 1'b0;
+                end
+                2'b11: begin          // Toggle
+                    q <= ~q;
+                    q_bar <= ~q_bar;
+                end
+            endcase
+        end
+    end
+endmodule
+~~~
+
+Developed by:Santhose Arockiaraj J
+RegisterNumber:24900171
+
 
 **RTL LOGIC FOR FLIPFLOPS**
 
+![Screenshot 2024-12-10 203501](https://github.com/user-attachments/assets/40bdbd31-fa74-492d-b30c-7aba6227e2c9)
+
 **TIMING DIGRAMS FOR FLIP FLOPS**
 
+![Screenshot 2024-12-10 204007](https://github.com/user-attachments/assets/e6efd36a-e1b0-42a7-955b-227b8bb0a026)
+
 **RESULTS**
+
+Thus, JK flipflop using verilog and validating their functionality using their functional table.
